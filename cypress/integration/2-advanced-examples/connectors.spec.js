@@ -46,7 +46,7 @@ context('Connectors', () => {
     })
   })
 
-  describe.only('.then()', () => {
+  describe('.then()', () => {
     it('invokes a callback function with the current subject', () => {
       // https://on.cypress.io/then
       // .then(cb) callback is not retried

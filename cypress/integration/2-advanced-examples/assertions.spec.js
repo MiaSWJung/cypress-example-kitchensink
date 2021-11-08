@@ -5,7 +5,7 @@ context('Assertions', () => {
     cy.visit('http://localhost:8080/commands/assertions')
   })
 
-  describe.only('Implicit Assertions', () => {
+  describe('Implicit Assertions', () => {
     it('.should() - make an assertion about the current subject', () => {
       // https://on.cypress.io/should
       // TODO : checkpoint : pin을 찍어놓고 command + shift + c (select element) 하면 cypress highlight를 target ..
@@ -40,7 +40,7 @@ context('Assertions', () => {
       // see https://on.cypress.io/using-cypress-faq#How-do-I-get-an-element’s-text-contents
     })
 
-    it.only('.and() - chain multiple assertions together', () => {
+    it('.and() - chain multiple assertions together', () => {
       // https://on.cypress.io/and
       // TODO : should chain vs and chain
       cy.get('.assertions-link')
