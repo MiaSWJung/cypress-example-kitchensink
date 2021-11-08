@@ -19,6 +19,7 @@ context('Connectors', () => {
     cy.get('.connectors-its-ul>li')
       // calls the 'length' property yielding that value
       .its('length')
+      //  should be greater than 2
       .should('be.gt', 2)
   })
 
@@ -37,6 +38,7 @@ context('Connectors', () => {
     // https://on.cypress.io/spread
     const arr = ['foo', 'bar', 'baz']
 
+    // https://docs.cypress.io/api/commands/wrap
     cy.wrap(arr).spread((foo, bar, baz) => {
       expect(foo).to.eq('foo')
       expect(bar).to.eq('bar')
@@ -44,9 +46,10 @@ context('Connectors', () => {
     })
   })
 
-  describe('.then()', () => {
+  describe.only('.then()', () => {
     it('invokes a callback function with the current subject', () => {
       // https://on.cypress.io/then
+      // .then(cb) callback is not retried
       cy.get('.connectors-list > li')
         .then(($lis) => {
           expect($lis, '3 items').to.have.length(3)
@@ -84,9 +87,8 @@ context('Connectors', () => {
       cy.wrap(1)
         .then((num) => {
           expect(num).to.equal(1)
-          // note how we run a Cypress command
-          // the result yielded by this Cypress command
-          // will be passed to the second ".then"
+          // 스코프 내부에서 마지막 Cypress 명령에 의해 yielded된 값을 yields합니다.
+          // 사이프레스 커맨드를 실행하는 방법에 주목합시다. 이 사이프레스 명령에 의해 yielded된 결과는 두 번째 ".then"으로 전달됩니다.
           cy.wrap(2)
         })
         .then((num) => {

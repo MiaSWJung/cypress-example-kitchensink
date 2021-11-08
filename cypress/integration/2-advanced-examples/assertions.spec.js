@@ -5,22 +5,24 @@ context('Assertions', () => {
     cy.visit('http://localhost:8080/commands/assertions')
   })
 
-  describe('Implicit Assertions', () => {
+  describe.only('Implicit Assertions', () => {
     it('.should() - make an assertion about the current subject', () => {
       // https://on.cypress.io/should
+      // TODO : checkpoint : pin을 찍어놓고 command + shift + c (select element) 하면 cypress highlight를 target ..
       cy.get('.assertion-table')
         .find('tbody tr:last')
         .should('have.class', 'success')
         .find('td')
         .first()
         // checking the text of the <td> element in various ways
+        // TODO : have.text vs contain vs have.html
         .should('have.text', 'Column content')
         .should('contain', 'Column content')
         .should('have.html', 'Column content')
         // chai-jquery uses "is()" to check if element matches selector
         .should('match', 'td')
         // to match text content against a regular expression
-        // first need to invoke jQuery method text()
+        // TODO : first need to invoke jQuery method text()
         // and then match using regular expression
         .invoke('text')
         .should('match', /column content/i)
@@ -38,12 +40,14 @@ context('Assertions', () => {
       // see https://on.cypress.io/using-cypress-faq#How-do-I-get-an-element’s-text-contents
     })
 
-    it('.and() - chain multiple assertions together', () => {
+    it.only('.and() - chain multiple assertions together', () => {
       // https://on.cypress.io/and
+      // TODO : should chain vs and chain
       cy.get('.assertions-link')
         .should('have.class', 'active')
         .and('have.attr', 'href')
         .and('include', 'cypress.io')
+      // .and('have.html', 'Cypress Docs')
     })
   })
 
@@ -71,7 +75,6 @@ context('Assertions', () => {
           // https://on.cypress.io/$
           // return an array of texts from all of the p's
           const texts = $p.map((i, el) => Cypress.$(el).text())
-
           // jquery map returns jquery object
           // and .get() convert this to simple array
           const paragraphs = texts.get()
@@ -89,6 +92,8 @@ context('Assertions', () => {
         })
     })
 
+    // TODO : .should() vs .then()
+    // https://docs.cypress.io/api/commands/should#What-s-the-difference-between-then-and-should-and
     it('finds element by class name regex', () => {
       cy.get('.docs-header')
         .find('div')
@@ -112,7 +117,7 @@ context('Assertions', () => {
         .find('div')
         .should(($div) => {
           if ($div.length !== 1) {
-            // you can throw your own errors
+            // TODO : you can throw your own errors
             throw new Error('Did not find 1 element')
           }
 
@@ -160,6 +165,7 @@ context('Assertions', () => {
         name: 'Joe',
         age: 20,
       }
+      // https://docs.cypress.io/guides/references/assertions#TDD-Assertions
 
       assert.isObject(person, 'value is object')
     })

@@ -58,6 +58,7 @@ describe('example to-do app', () => {
   })
 
   it('can check off an item as completed', () => {
+    // TODO : .get() vs .contains()
     // In addition to using the `get` command to get an element by selector,
     // we can also use the `contains` command to get an element by its contents.
     // However, this will yield the <label>, which is lowest-level element that contains the text.

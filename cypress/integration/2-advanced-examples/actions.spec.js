@@ -29,6 +29,7 @@ context('Actions', () => {
     cy.get('.action-disabled')
       // Ignore error checking prior to type
       // like whether the input is visible or disabled
+      // { force: true } : input이 disabled 상태여도 type()실행하도록
       .type('disabled error checking', { force: true })
       .should('have.value', 'disabled error checking')
   })
@@ -38,10 +39,12 @@ context('Actions', () => {
     cy.get('.action-focus').focus()
       .should('have.class', 'focus')
       .prev().should('have.attr', 'style', 'color: orange;')
+    // .prev() 요소 바로 앞에 있는 형제 선택
   })
 
   it('.blur() - blur off a DOM element', () => {
     // https://on.cypress.io/blur
+    // TODO : Q :blur 의 유즈케이스를 잘 모르겠읍니다.
     cy.get('.action-blur').type('About to blur').blur()
       .should('have.class', 'error')
       .prev().should('have.attr', 'style', 'color: red;')
@@ -260,7 +263,7 @@ context('Actions', () => {
       .should('have.text', '25')
   })
 
-  it('cy.scrollTo() - scroll the window or element to a position', () => {
+  it.only('cy.scrollTo() - scroll the window or element to a position', () => {
     // https://on.cypress.io/scrollto
 
     // You can scroll to 9 specific positions of an element:
